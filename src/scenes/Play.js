@@ -2,11 +2,9 @@ class Play extends Phaser.Scene {
     constructor() {
       super("playScene");
     }
-  
     create() {
         // place tile sprite
         this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0)
-
         // green UI background
         this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0)
 
@@ -28,10 +26,8 @@ class Play extends Phaser.Scene {
         keyRESET = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R)
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT)
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT)
-
         // initialize score
         this.p1Score = 0
-
         // display score
         let scoreConfig = {
             fontFamily: 'Courier',
@@ -40,8 +36,8 @@ class Play extends Phaser.Scene {
             color: '#843605',
             align: 'right',
             padding: {
-                top: 5,
-                bottom: 5
+            top: 5,
+            bottom: 5
             },
             fixedWidth: 100
         }
@@ -75,7 +71,6 @@ class Play extends Phaser.Scene {
             this.ship02.update()
             this.ship03.update()
         }
-
         // check collisions
         if(this.checkCollision(this.p1Rocket, this.ship03)) {
             this.p1Rocket.reset()
@@ -95,7 +90,6 @@ class Play extends Phaser.Scene {
             this.scene.start("menuScene")
           }
     }
-
     checkCollision(rocket, ship) {
         // simple AABB checking
         if (rocket.x < ship.x + ship.width && 
@@ -108,9 +102,14 @@ class Play extends Phaser.Scene {
         }
     }
 
+
+
+
+
     shipExplode(ship) {
         // temporarily hide ship
         ship.alpha = 0
+
         // create explosion sprite at ship's position
         let boom = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0, 0)
         boom.anims.play('explode')
